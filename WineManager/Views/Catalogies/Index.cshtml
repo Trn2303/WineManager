@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WineManager.Models.Catalogy>
+
+@{
+    ViewBag.Title = "Danh mục";
+}
+
+<h2>Danh sách danh mục</h2>
+
+<p>
+    @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-outline-info mx-2 float-end" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CatalogyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CatalogyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            <p class="mb-0">
+                @Html.ActionLink("Sửa", "Edit", new { id = item.CatalogyID.Trim() }, new { @class = "btn btn-outline-success" })&nbsp;
+                @Html.ActionLink("Chi tiết", "Details", new { id = item.CatalogyID.Trim() }, new { @class = "btn btn-outline-primary" })&nbsp;
+                @Html.ActionLink("Xóa", "Delete", new { id = item.CatalogyID.Trim() }, new { @class = "btn btn-outline-danger" })
+            </p>
+        </td>
+    </tr>
+}
+
+</table>

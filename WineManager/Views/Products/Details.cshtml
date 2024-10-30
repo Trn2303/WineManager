@@ -1,0 +1,56 @@
+﻿@model WineManager.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container my-4">
+    <div>
+        <p>
+            Home > @Html.DisplayFor(model => model.Catalogy.CatalogyName) > <span class="text-danger">@Html.DisplayFor(model => model.ProductName)</span>
+        </p>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-5 text-center">
+            @{
+                ViewBag.ImgPath = "~/wwwroot/WineImages/" + Html.DisplayFor(model => model.Image);
+            }
+            <img id="output" class="img-fluid rounded" alt="Ảnh" src="@Url.Content(@ViewBag.ImgPath)" style="max-width: 100%; height: auto;">
+        </div>
+        <div class="col-md-7">
+            <h2 class="text-danger mb-4">@Html.DisplayFor(model => model.ProductName)</h2>
+            <dl class="row">
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Catalogy.CatalogyName)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Catalogy.CatalogyName)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.ProductName)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.ProductName)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Description)</dt>
+                <dd class="col-sm-9 text-justify">@Html.DisplayFor(model => model.Description)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.PurchasePrice)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.PurchasePrice)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Price)</dt>
+                <dd class="col-sm-9 text-danger">@Html.DisplayFor(model => model.Price)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Quantity)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Quantity)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Vintage)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Vintage)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Region)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Region)</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.ProductID }, new { @class = "btn btn-outline-danger mx-2" })
+        @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-outline-secondary mx-2" })
+    </div>
+</div>
+

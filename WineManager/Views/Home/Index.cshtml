@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1 class="display-4">Wine Manager</h1>
+            <p class="lead">Quản lý danh sách các loại rượu và sản phẩm của bạn dễ dàng.</p>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Danh sách danh mục</h5>
+                    <p class="card-text">Xem và quản lý các loại rượu trong hệ thống.</p>
+                    <a href="@Url.Action("Index", "Catalogies")" class="btn btn-outline-primary">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Danh sách sản phẩm</h5>
+                    <p class="card-text">Xem và quản lý các sản phẩm rượu của bạn.</p>
+                    <a href="@Url.Action("Index", "Products")" class="btn btn-outline-success">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

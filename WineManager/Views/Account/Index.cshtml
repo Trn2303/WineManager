@@ -1,0 +1,139 @@
+﻿@{
+    ViewBag.Title = "Account";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login & Register</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+
+        .alert {
+            display: none;
+        }
+
+        .form-container {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 20px;
+            width: 50%;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div>
+                <div class="form-container" id="registerContainer">
+                    <h2 class="text-center">Register</h2>
+                    <form id="registerForm">
+                        <div class="form-group">
+                            <label for="registerUsername">Username</label>
+                            <input type="text" class="form-control" id="registerUsername" placeholder="Username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPassword">Password</label>
+                            <input type="password" class="form-control" id="registerPassword" placeholder="Password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerEmail">Email</label>
+                            <input type="email" class="form-control" id="registerEmail" placeholder="Email" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                        <div id="registerAlert" class="alert alert-danger mt-3"></div>
+                    </form>
+                    <button id="showLogin" class="btn btn-link">Already have an account? Login here.</button>
+                </div>
+            </div>
+            <div style="display: none;" id="loginContainer">
+                <div class="form-container">
+                    <h2 class="text-center mt-5">Login</h2>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginUsername">Username</label>
+                            <input type="text" class="form-control" id="loginUsername" placeholder="Username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">Login</button>
+                        <div id="loginAlert" class="alert alert-danger mt-3"></div>
+                    </form>
+                    <button id="showRegister" class="btn btn-link">Don't have an account? Register here.</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Show Register Form
+            $("#showRegister").click(function() {
+                $("#loginContainer").hide();
+                $("#registerContainer").show();
+            });
+
+            // Show Login Form
+            $("#showLogin").click(function() {
+                $("#registerContainer").hide();
+                $("#loginContainer").show();
+            });
+
+            $("#registerForm").submit(function(e) {
+                e.preventDefault();
+                var data = {
+                    Username: $("#registerUsername").val(),
+                    Password: $("#registerPassword").val(),
+                    Email: $("#registerEmail").val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Register", "Account")',
+                    data: JSON.stringify(data),
+                    contentType: "application/json",
+                    success: function(response) {
+                        $("#registerAlert").text(response.message).removeClass("alert-danger").addClass("alert-success").show();
+                    },
+                    error: function(response) {
+                        $("#registerAlert").text("Registration failed.").removeClass("alert-success").addClass("alert-danger").show();
+                    }
+                });
+            });
+
+            $("#loginForm").submit(function(e) {
+                e.preventDefault();
+                var data = {
+                    Username: $("#loginUsername").val(),
+                    Password: $("#loginPassword").val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Login", "Account")',
+                    data: JSON.stringify(data),
+                    contentType: "application/json",
+                    success: function(response) {
+                        $("#loginAlert").text(response.message).removeClass("alert-danger").addClass("alert-success").show();
+                    },
+                    error: function(response) {
+                        $("#loginAlert").text("Login failed.").removeClass("alert-success").addClass("alert-danger").show();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
